@@ -1,14 +1,11 @@
-# Use an official Tomcat image as a base image
-FROM tomcat:latest
-
-# Remove the default ROOT application
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
-
-# Copy your WAR file to the webapps directory in Tomcat
-COPY sns.war /usr/local/tomcat/webapps/ROOT.war
-
-# Expose the port on which Tomcat will run (default is 8080)
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:11-jre-slim
 EXPOSE 8086
+# Set the working directory in the container
+WORKDIR /app
 
-# Start Tomcat when the container starts
-CMD ["catalina.sh", "run"]
+# Copy the application JAR (assuming you have built a JAR file)
+COPY target/sns-sample.jar sns-sample.jar
+
+# Specify the command to run on container startup
+CMD ["java", "-jar", "sns-sample.jar"]
