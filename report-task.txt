@@ -1,0 +1,5 @@
+sonar-scanner \
+  -Dsonar.projectKey=snsSpringAPI \
+  -Dsonar.sources=src/main/java \
+  -Dsonar.host.url=https://sonarcloud.io/ \
+  -Dsonar.login=c300cf5c92b4a25734e101d1916e98b16787d5db
