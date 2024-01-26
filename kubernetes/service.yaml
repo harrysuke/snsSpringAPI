@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: snsService
+spec:
+  selector:
+    app: sas
+  ports:
+    - protocol: TCP
+      port: 80  # Expose the service on this port
+      targetPort: 8082  # Forward traffic to containers on this port
+  type: LoadBalancer  # Use LoadBalancer if running on a cloud provider, else use NodePort or ClusterIP

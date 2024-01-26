@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sns
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: sns
+  template:
+    metadata:
+      labels:
+        app: sns
+    spec:
+      containers:
+      - name: sns
+        image: sns-docker:latest  # Replace with your Docker image and tag
+        ports:
+        - containerPort: 8082  # Adjust the port based on your Spring app configuration
