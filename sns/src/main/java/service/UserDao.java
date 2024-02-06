@@ -25,11 +25,11 @@ public class UserDao {
     private HttpSession httpSession;
 
     public List<User> getAllUsers() {
-        String sql = "SELECT * FROM  admuser";
+        String sql = "SELECT Role_Id, User_Id, Staff_Name, Username, Email, katalaluan, Access_Level FROM  admuser";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
-    public User getUserById(int id) {
+    public User getUserById(String id) {
         String sql = "SELECT * FROM  admuser WHERE User_Id=?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(User.class));
     }

@@ -1,10 +1,13 @@
 package controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +32,7 @@ public class UserController {
 	@PostMapping("/login")
 	public String loginUser(@ModelAttribute("user") User user, Model model) {
 		userDao.loginUser(user.getUser_Id(), user.getKatalaluan());
-		return "redirect:/product/list";
+		return "redirect:/vep/list";
 	}
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
@@ -44,6 +47,20 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout() {
 		return "redirect:/user/login";
+	}
+	
+	@RequestMapping("/list")
+	public String userList(Model model) {
+		List<User> users = userDao.getAllUsers();
+		model.addAttribute("users", users);
+		return "userList";
+	}
+	
+	@RequestMapping("/profile/{id}")
+	public String profile(@PathVariable String id, Model model) {
+		User user = userDao.getUserById(id);
+		model.addAttribute("user", user);
+		return "profile";
 	}
 
 }

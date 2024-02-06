@@ -3,13 +3,16 @@ package controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import entity.Vep;
 import service.VepDao;
@@ -45,8 +48,15 @@ public class VepController {
 		return "vepNew";
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/add2")
 	public String add(@ModelAttribute("vep") Vep vep, Model model) {
+		model.addAttribute("vep", vep);
+		int numofRowAffected = vepDao.createVep(vep);
+		return "redirect:/vep/list";
+	}
+	
+	@PostMapping("/add")
+	public String addVep(@ModelAttribute("vep") Vep vep, Model model) {
 		model.addAttribute("vep", vep);
 		int numofRowAffected = vepDao.createVep(vep);
 		return "redirect:/vep/list";
@@ -57,6 +67,18 @@ public class VepController {
 		Vep vep = vepDao.getVepById(id);
 		model.addAttribute("vep", vep);
 		return "vepUpdate";
+	}
+	
+	@PostMapping("/update")
+	public String updateVep(@ModelAttribute("vep") Vep vep, Model model) {
+		int rowAffected = vepDao.updateVep(vep);
+		return "redirect:/vep/list";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable int id) {
+		int rowAffected = vepDao.deleteVep(id);
+		return "redirect:/vep/list";
 	}
 
 }

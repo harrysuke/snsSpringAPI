@@ -4,79 +4,96 @@
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css"
-	integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+<%
+	String title = "Sns Vep List";
+%>
+<%@ include file="inc_head.jsp"%>
 </head>
-<meta charset="UTF-8">
-<title>SNS</title>
-</head>
-<body>
-<%@ include file="inc_navbar.jsp"%>
-<div class="container">
-	<table class="table" id="myTable">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>RNU</th>
-				<th>NRIC Passport No</th>
-				<th>name</th>
-				<th>companyName</th>
-				<th>vehicleNo</th>
-				<th>contactNo</th>
-				<th>dateofVisit</th>
-				<th>expiryDate</th>
-				<th>locationtoVisit</th>
-				<th>purposeofVisit</th>
-				<th>permitType</th>
-			</tr>
-		</thead>
-		<c:forEach items="${vepList}" var="vep">
-			<tr>
-				<td><c:out value="${vep.id}"></c:out></td>
-				<td><c:out value="${vep.rnu}"></c:out></td>
-				<td><c:out value="${vep.NRICPassportNo}"></c:out></td>
-				<td><c:out value="${vep.name }"></c:out></td>
-				<td><c:out value="${vep.companyName }"></c:out></td>
-				<td><c:out value="${vep.vehicleNo }"></c:out></td>
-				<td><c:out value="${vep.contactNo }"></c:out></td>
-				<td><c:out value="${vep.dateofVisit }"></c:out></td>
-				<td><c:out value="${vep.expiryDate }"></c:out></td>
-				<td><c:out value="${vep.locationtoVisit }"></c:out></td>
-				<td><c:out value="${vep.purposeofVisit }"></c:out></td>
-				<td><c:out value="${vep.permitType }"></c:out></td>
-			</tr>
-		</c:forEach>
-	</table>
-	</div>
-	<%@ include file="inc_footer.jsp" %>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
-		integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap5.min.js"
-		integrity="sha512-Fg4eN8x1JYP5+pCHtphLssZSJmKJfq2w6fM5fdC18+7yoKqn+KK1u5FeIvTrJmye2qmTkwWp4b7SfM9SWDk7HQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script>
-		$(document).ready(function() {
-			$("#myTable").DataTable();
-		});
-	</script>
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light" data-pc-layout="tab" data-pc-direction="ltr">
+
+
+	<!-- [ Sidebar Menu ] start -->
+	<%@ include file="inc_sidebar.jsp"%>
+	<!-- [ Sidebar Menu ] end -->
+
+	<!-- [ Header Topbar ] start -->
+	<%@ include file="inc_navbar.jsp"%>
+	<!-- [ Header ] end -->
+
+	<!-- [ Main Content ] start -->
+	<section class="pc-container">
+		<div class="pc-content">
+			<!-- [ Main Content ] start -->
+			<div class="row">
+				<!-- DOM/Jquery table start -->
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-header">
+							<h5>Vep List</h5>
+							<small>...</small>
+						</div>
+						<div class="card-body">
+							<div class="dt-responsive table-responsive">
+
+								<table id="datatable" class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>NRIC/Passport</th>
+											<th>Name</th>
+											<th>CompanyName</th>
+											<th>VehicleNo</th>
+											<th>ContactNo</th>
+											<th>DateofVisit</th>
+											<th>ExpiryDate</th>
+											<th>LocationtoVisit</th>
+											<th>PurposeofVisit</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>ID</th>
+											<th>NRIC/Passport</th>
+											<th>Name</th>
+											<th>CompanyName</th>
+											<th>VehicleNo</th>
+											<th>ContactNo</th>
+											<th>DateofVisit</th>
+											<th>ExpiryDate</th>
+											<th>LocationtoVisit</th>
+											<th>PurposeofVisit</th>
+											<th>Action</th>
+										</tr>
+									</tfoot>
+									<c:forEach items="${vepList}" var="vep">
+										<tr>
+											<td><c:out value="${vep.id}"></c:out></td>
+											<td><c:out value="${vep.NRICPassportNo}"></c:out></td>
+											<td><c:out value="${vep.name }"></c:out></td>
+											<td><c:out value="${vep.companyName }"></c:out></td>
+											<td><c:out value="${vep.vehicleNo }"></c:out></td>
+											<td><c:out value="${vep.contactNo }"></c:out></td>
+											<td><c:out value="${vep.dateofVisit }"></c:out></td>
+											<td><c:out value="${vep.expiryDate }"></c:out></td>
+											<td><c:out value="${vep.locationtoVisit }"></c:out></td>
+											<td><c:out value="${vep.purposeofVisit }"></c:out></td>
+											<td>
+											<a href="/sns/vep/edit/<c:out value="${vep.id}"></c:out>"><i class="fa-solid fa-pencil"></i></a>
+											<a href="/sns/vep/delete/<c:out value="${vep.id}"></c:out>"><i class="fa-solid fa-trash-can"></i></a>
+											</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%@ include file="inc_footer.jsp"%>
+	</section>
+	<%@ include file="inc_scripts.jsp"%>
 </body>
 </html>

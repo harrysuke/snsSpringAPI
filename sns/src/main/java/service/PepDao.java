@@ -3,11 +3,13 @@ package service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import entity.Pep;
+import entity.Vep;
 
 @Service
 public class PepDao {
@@ -15,41 +17,67 @@ public class PepDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<Pep> getAll(){
-		String sql = "SELECT * FROM pep";
-		List<Pep> pepList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Pep>(Pep.class));
-		return pepList;
+		try {
+			String sql = "SELECT id, rnu, IdentityNo, Name, ContactNo, EMailAddress, HomeAddress, LocationtoVisit, PurposeofVisit, CompanyName, OfficeAddress, ContactNoOffice, VehicleNo FROM pep";
+			List<Pep> pepList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Pep>(Pep.class));
+			return pepList;
+		}catch(DataAccessException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
-	public List<Pep> getPepById(int id) {
-		String sql = "SELECT * FROM pep WHERE id=?";
-		return jdbcTemplate.query(sql, new Object[] {id}, new BeanPropertyRowMapper<Pep>(Pep.class));
+	public Pep getPepById(int id) {
+		String sql = "SELECT id, rnu, IdentityNo, Name, ContactNo, EMailAddress, HomeAddress, LocationtoVisit, PurposeofVisit, CompanyName, OfficeAddress, ContactNoOffice, VehicleNo FROM pep WHERE id=?";
+		return jdbcTemplate.queryForObject(sql, new Object[] {id}, new BeanPropertyRowMapper<Pep>(Pep.class));
 	}
 	
 	public int createPep(Pep pep) {
-		String sql = "INSERT INTO pep (IdentityNo, Name, ContactNo, EmailAddress, VehicleNo) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO pep (rnu, IdentityNo, Name, ContactNo, EmailAddress, HomeAddress, LocationtoVisit, PurposeofVisit, CompanyName, OfficeAddress, ContactNoOffice, VehicleNo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		int rowsAffected = jdbcTemplate.update(
 				sql,
+				pep.getRnu(),
 				pep.getIdentityNo(),
 				pep.getName(),
 				pep.getContactNo(),
 				pep.getEMailAddress(),
+				pep.getHomeAddress(),
+				pep.getLocationtoVisit(),
+				pep.getPurposeofVisit(),
+				pep.getCompanyName(),
+				pep.getOfficeAddress(),
+				pep.getContactNoOffice(),
 				pep.getVehicleNo()
 				);
 		return rowsAffected;
 	}
 	
-	public int UpdatePep(Pep pep) {
-		String sql = "Update pep SET IdentityNo=?, Name=?, ContactNo=?, EmailAddress=?, VehicleNo=? WHERE id=?";
-		int rowAffected = jdbcTemplate.update(
-				sql,
-				pep.getIdentityNo(),
-				pep.getName(),
-				pep.getContactNo(),
-				pep.getEMailAddress(),
-				pep.getVehicleNo(),
-				pep.getId()
-				);
-		return rowAffected;
+	public int updatePep(Pep pep) {
+		try {
+			String sql = "UPDATE pep SET rnu=?, IdentityNo=?, Name=?, ContactNo=?, EMailAddress=?, " +
+		            "HomeAddress=?, LocationtoVisit=?, PurposeofVisit=?, CompanyName=?, OfficeAddress=?, " +
+		            "ContactNoOffice=?, VehicleNo=? WHERE id=?";
+		    int rowAffected = jdbcTemplate.update(
+		            sql,
+		            pep.getRnu(),
+		            pep.getIdentityNo(),
+		            pep.getName(),
+		            pep.getContactNo(),
+		            pep.getEMailAddress(),
+		            pep.getHomeAddress(),
+		            pep.getLocationtoVisit(),
+		            pep.getPurposeofVisit(),
+		            pep.getCompanyName(),
+		            pep.getOfficeAddress(),
+		            pep.getContactNoOffice(),
+		            pep.getVehicleNo(),
+		            pep.getId()
+		    );
+		    return rowAffected;
+		}catch(DataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 	public int deletePep(int id) {

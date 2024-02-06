@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -26,22 +27,26 @@ public class VepDao {
 	}
 	
 	public int createVep(Vep vep) {
-		String sql="INSERT INTO vep (rnu, NRICPassportNo, Name, CompanyName, VehicleNo, ContactNo, DateofVisit, ExpiryDate, LocationtoVisit, PurposeofVisit, PermitType) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-		int rowsAffected = jdbcTemplate.update(
-				sql, 
-				vep.getRnu(), 
-				vep.getNRICPassportNo(), 
-				vep.getName(), 
-				vep.getCompanyName(), 
-				vep.getVehicleNo(), 
-				vep.getContactNo(), 
-				vep.getDateofVisit(), 
-				vep.getExpiryDate(), 
-				vep.getLocationtoVisit(), 
-				vep.getPurposeofVisit(), 
-				vep.getPermitType()
-				);
-		return rowsAffected;
+		try {
+			String sql="INSERT INTO vep (rnu, Name, CompanyName, VehicleNo, ContactNo, DateofVisit, ExpiryDate, LocationtoVisit, PurposeofVisit, PermitType) VALUES (?,?,?,?,?,?,?,?,?,?)";
+			int rowsAffected = jdbcTemplate.update(
+					sql, 
+					vep.getRnu(), 
+					vep.getName(), 
+					vep.getCompanyName(), 
+					vep.getVehicleNo(), 
+					vep.getContactNo(), 
+					vep.getDateofVisit(), 
+					vep.getExpiryDate(), 
+					vep.getLocationtoVisit(), 
+					vep.getPurposeofVisit(), 
+					vep.getPermitType()
+					);
+			return rowsAffected;
+		}catch(DataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 	public int updateVep(Vep vep) {

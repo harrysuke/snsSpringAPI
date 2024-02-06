@@ -4,7 +4,7 @@ public class Pep {
 	private int id;
 	private int rnu;
 	private String IdentityNo, Name, ContactNo, EMailAddress, HomeAddress, LocationtoVisit;
-	private String PurposeofVisit, CompanyName, OfficeAddress, ContactNoOffice, VehicleNo;
+	private String PurposeofVisit, CompanyName, OfficeAddress, ContactNoOffice, VehicleNo; 
 	
 	public Pep() {
 		super();
