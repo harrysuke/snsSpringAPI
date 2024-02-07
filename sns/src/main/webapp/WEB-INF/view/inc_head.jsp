@@ -20,7 +20,7 @@
     <!-- [Material Icons] https://fonts.google.com/icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- [themify] icon -->
-    <link rel="stylesheet" href="https://unpkg.com/@icon/themify-icons/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://admin.pixelstrap.com/cuba/assets/css/vendors/themify.css">
     
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="https://ableproadmin.com/assets/css/style.css" id="main-style-link" >

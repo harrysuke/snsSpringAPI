@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.*,java.util.*,javax.servlet.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.jsp.*"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
     <h2>Error Page</h2>
 
     <div>
-        <p>An error occurred: ${errorMessage}</p>
+        <p>An error occurred: <c:out value="${errorMessage}"/></p>
         <p>Please contact the administrator for assistance.</p>
     </div>
 

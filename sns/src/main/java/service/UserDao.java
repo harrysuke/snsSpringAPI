@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +26,7 @@ public class UserDao {
     private HttpSession httpSession;
 
     public List<User> getAllUsers() {
-        String sql = "SELECT Role_Id, User_Id, Staff_Name, Username, Email, katalaluan, Access_Level FROM  admuser";
+        String sql = "SELECT Role_Id, User_Id, Staff_Name, Username, Email, katalaluan, Access_Level FROM admuser";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
@@ -68,10 +69,10 @@ public class UserDao {
         }
     }
 
-    public int registerUser(User user) {
-        String sql = "INSERT INTO  admuser (User_Id, Staff_Name, Username, katalaluan, Email) VALUES (?,?,?,?,?)";
-        try {
-        	return jdbcTemplate.update(
+    public void registerUser(User user) {
+    	try {
+    		String sql = "INSERT INTO admuser (User_Id, Staff_Name, Username, katalaluan, Email) VALUES (?,?,?,?,?)";
+        	jdbcTemplate.update(
                     sql,
                     user.getUser_Id(),
                     user.getStaff_Name(),
@@ -79,11 +80,9 @@ public class UserDao {
                     user.getKatalaluan(),
                     user.getEmail()
             );
-        }catch(Exception e) {
-        	e.printStackTrace();
-        	return 0;
-        }
-        
+    	}catch(DataAccessException e) {
+    		throw new RuntimeException(e.getMessage(), e);
+    	}
     }
 
     public int updateUser(User user) {

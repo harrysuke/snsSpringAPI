@@ -83,7 +83,7 @@
 									here</a></li>
 						</ul></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="/OnlineShopSpringWebApp/user/logout">Log out</a></li>
+						href="/sns/user/logout">Log out</a></li>
 				</ul>
 			</div>
 		</div>
@@ -122,7 +122,7 @@
         </svg>
 				</a>
 					<div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
-						<a href="#!" class="dropdown-item"> <i class="ti ti-user"></i>
+						<a href="/sns/user/profile/" class="dropdown-item"> <i class="ti ti-user"></i>
 							<span>My Account</span>
 						</a> <a href="#!" class="dropdown-item"> <i class="ti ti-settings"></i>
 							<span>Settings</span>
@@ -130,7 +130,7 @@
 							<span>Support</span>
 						</a> <a href="#!" class="dropdown-item"> <i class="ti ti-lock"></i>
 							<span>Lock Screen</span>
-						</a> <a href="#!" class="dropdown-item"> <i class="ti ti-power"></i>
+						</a> <a href="/sns/user/logout" class="dropdown-item"> <i class="ti ti-power"></i>
 							<span>Logout</span>
 						</a>
 					</div></li>
@@ -284,16 +284,8 @@
 											alt="user-image" class="user-avtar wid-35" />
 									</div>
 									<div class="flex-grow-1 ms-3">
-										<c:choose>
-											<c:when test="${not empty user }">
-												<h6 class="mb-1">${user.Username }üññ</h6>
-												<span>${user.Email }</span>
-											</c:when>
-											<c:otherwise>
 												<h6 class="mb-1">Adminüññ</h6>
 												<span>admin@localhost</span>
-											</c:otherwise>
-										</c:choose>
 									</div>
 								</div>
 								<hr class="border-secondary border-opacity-50" />
@@ -404,12 +396,7 @@
 										<h3 class="my-3 text-dark">
 											245.3k <small class="text-muted">Followers</small>
 										</h3>
-										<div class="btn btn btn-warning">
-											<svg class="pc-icon me-2">
-                    <use xlink:href="#custom-logout-1-outline"></use>
-                  </svg>
-											Upgrade to Business
-										</div>
+										
 									</div>
 								</div>
 							</div>

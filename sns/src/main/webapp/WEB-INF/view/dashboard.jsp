@@ -30,7 +30,7 @@
             <div class="card social-widget-card bg-primary">
               <div class="card-body">
                 <h3 class="text-white m-0"><c:out value="${userCount }"></c:out></h3>
-                <span class="m-t-10">SNS Users</span>
+                <span class="text-white m-t-10">SNS Users</span>
                 <i class="fa-solid fa-user"></i>
               </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="card social-widget-card bg-info">
               <div class="card-body">
                 <h3 class="text-white m-0"><c:out value="${not empty adminCount ? adminCount: 0}"></c:out></h3>
-                <span class="m-t-10">SNS Admin</span>
+                <span class="text-white m-t-10">SNS Admin</span>
                 <i class="fa-solid fa-user-tie"></i>
               </div>
             </div>
@@ -48,7 +48,7 @@
             <div class="card social-widget-card bg-success">
               <div class="card-body">
                 <h3 class="text-white m-0"><c:out value="${pepCount }"></c:out></h3>
-                <span class="m-t-10">PEP Stats</span>
+                <span class="text-white m-t-10">PEP Stats</span>
                 <i class="fa-solid fa-chart-pie"></i>
               </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="card social-widget-card bg-danger">
               <div class="card-body">
                 <h3 class="text-white m-0"><c:out value="${vepCount }"></c:out></h3>
-                <span class="m-t-10">VEP Stats</span>
+                <span class="text-white m-t-10">VEP Stats</span>
                 <i class="fa-solid fa-chart-pie"></i>
               </div>
             </div>

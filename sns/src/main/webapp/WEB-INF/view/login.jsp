@@ -1,45 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<%
+	String title = "Sns Login";
+%>
+<%@ include file="inc_head.jsp"%>
 </head>
-<body>
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true"
+	data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light"
+	data-pc-layout="tab" data-pc-direction="ltr">
 
-<div class="container">
-    <h2>Login</h2>
-
-    <form action="<%=request.getContextPath()%>/user/login" method="post">
-        <div class="mb-3">
-            <label for="User_Id">User Id:</label>
-            <input type="text" id="User_Id" name="User_Id" class="form-control" placeholder="User_Id" required>
-        </div>
-        <div class="mb-3">
-            <label for="katalaluan">Password:</label>
-            <input type="password" id="katalaluan" name="katalaluan" class="form-control" placeholder="Katalaluan" required>
-        </div>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Login</button>
-            <a href="<%=request.getContextPath()%>/user/register" class="btn btn-link">Register</a>
-        </div>
-    </form>
-
-</div>
-
-
-
-<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-		crossorigin="anonymous"></script>
+	<div class="auth-main">
+		<div class="auth-wrapper v2">
+			<div class="auth-sidecontent">
+				<img src="https://dashcode-react.codeshaper.net/assets/ils1.488442d7.svg"
+					alt="images" class="img-fluid img-auth-side">
+			</div>
+			<div class="auth-form">
+				<div class="card my-5">
+					<div class="card-body">
+						<h4 class="text-center f-w-500 mb-3">Sign in with your email</h4>
+						<form action="<%=request.getContextPath()%>/user/login"
+							method="post">
+							<div class="form-group mb-3">
+								<input type="text"
+									id="floatingInput" name="User_Id" class="form-control"
+									placeholder="User_Id" required>
+							</div>
+							<div class="form-group mb-3">
+								<input type="password"
+									id="floatingInput1" name="katalaluan" class="form-control"
+									placeholder="Katalaluan" required>
+							</div>
+							<div class="d-grid mt-4">
+								<button type="submit" class="btn btn-primary">Sign in</button>
+							</div>
+						</form>
+						<div class="d-flex justify-content-between align-items-end mt-4">
+							<h6 class="f-w-500 mb-0">Don't have an Account?</h6>
+							<a href="<%=request.getContextPath()%>/user/register" class="link-primary">Create Account</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%@ include file="inc_scripts.jsp"%>
 </body>
 </html>
