@@ -2,7 +2,7 @@
 
 ## Instructions
 
-### For Spring MVC search your dependencies from the Mvn repository 
+### For Spring MVC search your dependencies from the Mvn repository at:
 <https://mvnrepository.com/>
 
 ### For Spring Boot apply your dependencies from:
